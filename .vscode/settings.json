@@ -3,6 +3,5 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/73acb454-9f13-4fca-b11f-d46f3d3523e7/resourceGroups/wooliesx/providers/Microsoft.Web/sites/wooliesx-test",
     "appService.deploySubpath": "."
 }

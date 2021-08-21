@@ -3,6 +3,6 @@ import { productController } from '../../controllers';
 const route = Router();
 
 export default (app: Router) => {
-  app.use('/products', route);
+  app.use('/answers', route);
   route.get('/sort', productController.getProducts);
 };

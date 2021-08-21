@@ -15,6 +15,7 @@ export default {
   resourceUri: {
     product: process.env.PRODUCT_RESOURCE_URL,
     history: process.env.SHOPPER_HISTORY_URL,
+    trolley: process.env.TROLLEY_URL,
   },
   port: parseInt(process.env.PORT, 10),
   logs: {
