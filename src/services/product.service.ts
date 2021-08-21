@@ -18,7 +18,7 @@ export const getProducts = async (sortOption): Promise<IProduct[]> => {
     );
   }
 
-  const resp = await axios.get(`${config.resourceUri.product}?token=${config.secret.token}`);
+  const resp = await axios.get(`${config.externalService.wooliesBaseUrl}/products?token=${config.secret.token}`);
   let productCollection = resp.data;
   if (!sortOption) return productCollection;
 
@@ -46,7 +46,7 @@ const sortByPrice = (productCollection: IProduct[], sortOption: SortOption): IPr
 };
 
 const sortByPopularity = async (): Promise<IProduct[]> => {
-  const resp = await axios.get(`${config.resourceUri.history}?token=${config.secret.token}`);
+  const resp = await axios.get(`${config.externalService.wooliesBaseUrl}/shopperHistory?token=${config.secret.token}`);
   const responseData = resp.data;
   let productCollection = responseData.reduce((acc, val) => acc.concat(val.products), []);
   const cnts = productCollection.reduce(function (obj, item) {

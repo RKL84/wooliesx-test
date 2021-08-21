@@ -12,10 +12,8 @@ export default {
   secret: {
     token: process.env.TOKEN,
   },
-  resourceUri: {
-    product: process.env.PRODUCT_RESOURCE_URL,
-    history: process.env.SHOPPER_HISTORY_URL,
-    trolley: process.env.TROLLEY_URL,
+  externalService: {
+    wooliesBaseUrl: process.env.WOOLIES_BASE_URLs,
   },
   port: parseInt(process.env.PORT, 10),
   logs: {
