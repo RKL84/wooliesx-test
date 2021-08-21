@@ -1,8 +1,23 @@
 import { IProduct } from '../models/product.interface';
 import axios from 'axios';
 import config from '../config';
+import HttpError from '../api/error';
 
-export const getProducts = async (sortOption: SortOption): Promise<IProduct[]> => {
+const SORT_METHOD_LOW = 'low';
+const SORT_METHOD_HIGH = 'high';
+const SORT_METHOD_ASC = 'ascending';
+const SORT_METHOD_DESC = 'descending';
+const SORT_METHOD_RECOMMENDED = 'recommended';
+const SORT_METHODS = [SORT_METHOD_LOW, SORT_METHOD_HIGH, SORT_METHOD_ASC, SORT_METHOD_DESC, SORT_METHOD_RECOMMENDED];
+
+export const getProducts = async (sortOption): Promise<IProduct[]> => {
+  if (!SORT_METHODS.includes(sortOption)) {
+    throw new HttpError(
+      400,
+      `param 'sortOption' is required using one of following values: ${SORT_METHODS.toString()}`,
+    );
+  }
+
   const resp = await axios.get(`${config.resourceUri.product}?token=${config.secret.token}`);
   let productCollection = resp.data;
   if (!sortOption) return productCollection;
