@@ -45,6 +45,9 @@ curl -X POST \
 }'
 ```
 
+![image](https://user-images.githubusercontent.com/13943254/130344933-55830db9-c0b4-47b7-8753-5947e59e8c53.png)
+
+
 ### Exercise 2
 
 https://wooliesx-test.azurewebsites.net/api/answers/sort?sortOption=low  
