@@ -18,7 +18,7 @@ export const getProducts = async (sortOption): Promise<IProduct[]> => {
     );
   }
 
-  const resp = await axios.get(`${config.externalService.wooliesBaseUrl}products?token=${config.secret.token}`);
+  const resp = await axios.get(`${config.externalService.wooliesBaseUrl}/products?token=${config.secret.token}`);
   let productCollection = resp.data;
   if (!sortOption) return productCollection;
 
