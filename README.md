@@ -68,6 +68,9 @@ curl -X POST \
 }'
 ```
 
+![image](https://user-images.githubusercontent.com/13943254/130347125-4d615959-598c-4fa5-8979-46d306c60364.png)
+
+
 ### Exercise 3
 
 https://wooliesx-test.azurewebsites.net/api/answers/trolleyTotal 
