@@ -13,7 +13,7 @@ export default {
     token: process.env.TOKEN,
   },
   externalService: {
-    wooliesBaseUrl: process.env.WOOLIES_BASE_URLs,
+    wooliesBaseUrl: process.env.WOOLIES_BASE_URL,
   },
   port: parseInt(process.env.PORT, 10),
   logs: {
