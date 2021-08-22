@@ -11,6 +11,7 @@ const SORT_METHOD_RECOMMENDED = 'recommended';
 const SORT_METHODS = [SORT_METHOD_LOW, SORT_METHOD_HIGH, SORT_METHOD_ASC, SORT_METHOD_DESC, SORT_METHOD_RECOMMENDED];
 
 export const getProducts = async (sortOption: string): Promise<IProduct[]> => {
+  sortOption = sortOption.toLowerCase();
   if (!SORT_METHODS.includes(sortOption.toLowerCase())) {
     throw new HttpError(
       400,
