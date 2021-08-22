@@ -10,8 +10,8 @@ const SORT_METHOD_DESC = 'descending';
 const SORT_METHOD_RECOMMENDED = 'recommended';
 const SORT_METHODS = [SORT_METHOD_LOW, SORT_METHOD_HIGH, SORT_METHOD_ASC, SORT_METHOD_DESC, SORT_METHOD_RECOMMENDED];
 
-export const getProducts = async (sortOption): Promise<IProduct[]> => {
-  if (!SORT_METHODS.includes(sortOption)) {
+export const getProducts = async (sortOption: string): Promise<IProduct[]> => {
+  if (!SORT_METHODS.includes(sortOption.toLowerCase())) {
     throw new HttpError(
       400,
       `param 'sortOption' is required using one of following values: ${SORT_METHODS.toString()}`,
