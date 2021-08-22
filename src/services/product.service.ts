@@ -27,7 +27,7 @@ export const getProducts = async (sortOption: string): Promise<IProduct[]> => {
   } else if (sortOption == SORT_METHOD_ASC || sortOption == SORT_METHOD_DESC) {
     productCollection = sortByName(productCollection, sortOption);
   } else if (sortOption == SORT_METHOD_RECOMMENDED) {
-    productCollection = await sortByPopularity();
+    productCollection = await sortByPopularity(productCollection);
   }
 
   return productCollection;
@@ -45,24 +45,16 @@ const sortByPrice = (productCollection: IProduct[], sortOption: string): IProduc
     : productCollection.sort((a, b) => b.price - a.price);
 };
 
-const sortByPopularity = async (): Promise<IProduct[]> => {
+const sortByPopularity = async (productCollection): Promise<IProduct[]> => {
   const resp = await axios.get(`${config.externalService.wooliesBaseUrl}/shopperHistory?token=${config.secret.token}`);
   const responseData = resp.data;
-  let productCollection = responseData.reduce((acc, val) => acc.concat(val.products), []);
-  const cnts = productCollection.reduce(function (obj, item) {
+  let productsByUsers = responseData.reduce((acc, val) => acc.concat(val.products), []);
+
+  const cnts = productsByUsers.reduce(function (obj, item) {
     obj[item.name] = (obj[item.name] || 0) + 1;
     return obj;
   }, {});
 
-  let result = productCollection.reduce((acc, current) => {
-    const product = acc.find(item => item.name === current.name);
-    if (!product) {
-      return acc.concat([current]);
-    } else {
-      return acc;
-    }
-  }, []);
-
-  result = result.sort((a, b) => cnts[b.name] - cnts[a.name]);
-  return result;
+  productCollection = productCollection.sort((a, b) => (cnts[b.name] || 0) - (cnts[a.name] || 0));
+  return productCollection;
 };
