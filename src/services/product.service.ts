@@ -20,27 +20,26 @@ export const getProducts = async (sortOption): Promise<IProduct[]> => {
 
   const resp = await axios.get(`${config.externalService.wooliesBaseUrl}/products?token=${config.secret.token}`);
   let productCollection = resp.data;
-  if (!sortOption) return productCollection;
 
-  if (sortOption == SortOption.LOW || sortOption == SortOption.HIGH) {
+  if (sortOption == SORT_METHOD_LOW || sortOption == SORT_METHOD_HIGH) {
     productCollection = sortByPrice(productCollection, sortOption);
-  } else if (sortOption == SortOption.ASCENDING || sortOption == SortOption.DESCENDING) {
+  } else if (sortOption == SORT_METHOD_ASC || sortOption == SORT_METHOD_DESC) {
     productCollection = sortByName(productCollection, sortOption);
-  } else if (sortOption == SortOption.RECEOMMENDED) {
+  } else if (sortOption == SORT_METHOD_RECOMMENDED) {
     productCollection = await sortByPopularity();
   }
 
   return productCollection;
 };
 
-const sortByName = (productCollection: IProduct[], sortOption: SortOption): IProduct[] => {
-  return sortOption == SortOption.ASCENDING
+const sortByName = (productCollection: IProduct[], sortOption: string): IProduct[] => {
+  return sortOption == SORT_METHOD_ASC
     ? productCollection.sort((a, b) => (a.name > b.name ? 1 : -1))
     : productCollection.sort((a, b) => (a.name < b.name ? 1 : -1));
 };
 
-const sortByPrice = (productCollection: IProduct[], sortOption: SortOption): IProduct[] => {
-  return sortOption == SortOption.LOW
+const sortByPrice = (productCollection: IProduct[], sortOption: string): IProduct[] => {
+  return sortOption == SORT_METHOD_LOW
     ? productCollection.sort((a, b) => a.price - b.price)
     : productCollection.sort((a, b) => b.price - a.price);
 };
